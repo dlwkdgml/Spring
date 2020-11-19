@@ -1,0 +1,18 @@
+package com.example.domain;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class MessgeVO {
+
+	private int mid;
+	private String sender;
+	private String receiver;
+	private String messge;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="Asia/Seoul")
+	private Date sendDate;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="Asia/Seoul")
+	private Date readDate;
+	
+}
