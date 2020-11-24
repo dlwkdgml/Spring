@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper_oracle.CirclesMapper">
+	<insert id = "insert">
+		insert into tbl_cir(c_code, c_pid, c_welcome, c_condition, c_name, c_category, c_tag, c_pic, c_spot, c_pchk, c_regDate) 
+		values(#{c_code}, #{c_pid}, #{c_welcome}, #{c_condition}, #{c_name}, #{c_category}, #{c_tag}, #{c_pic}, #{c_spot}, #{c_pchk}, sysdate)
+	</insert>
+</mapper>

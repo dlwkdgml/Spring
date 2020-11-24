@@ -1,0 +1,11 @@
+package com.example.mapper;
+
+import java.util.List;
+
+import com.example.domain.BookVO;
+
+public interface BookMapper {
+	
+	public void insert(BookVO vo);
+	public List<BookVO> list();
+}

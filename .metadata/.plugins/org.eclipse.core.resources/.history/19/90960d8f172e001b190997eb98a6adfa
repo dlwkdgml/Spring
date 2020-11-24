@@ -1,0 +1,132 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script>
+    function wrapWindowByMask() {
+        //화면의 높이와 너비를 구한다.
+        var maskHeight = $(document).height(); 
+        var maskWidth = $(window).width();
+
+        //문서영역의 크기 
+        console.log( "document 사이즈:"+ $(document).width() + "*" + $(document).height()); 
+        //브라우저에서 문서가 보여지는 영역의 크기
+        console.log( "window 사이즈:"+ $(window).width() + "*" + $(window).height());        
+
+        //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+        $('#mask').css({
+            'width' : maskWidth,
+            'height' : maskHeight
+        });
+
+        //애니메이션 효과
+        //$('#mask').fadeIn(1000);      
+        $('#mask').fadeTo("slow", 0.5);
+    }
+
+    function popupOpen() {
+        $('.layerpop').css("position", "absolute");
+        //영역 가운에데 레이어를 뛰우기 위해 위치 계산 
+        $('.layerpop').css("top",(($(window).height() - $('.layerpop').outerHeight()) / 2) + $(window).scrollTop());
+        $('.layerpop').css("left",(($(window).width() - $('.layerpop').outerWidth()) / 2) + $(window).scrollLeft());
+        $('.layerpop').draggable();
+        $('#layerbox').show();
+    }
+
+    function popupClose() {
+        $('#layerbox').hide();
+        $('#mask').hide();
+    }
+
+    function goDetail() {
+
+        /*팝업 오픈전 별도의 작업이 있을경우 구현*/ 
+
+        popupOpen(); //레이어 팝업창 오픈 
+        wrapWindowByMask(); //화면 마스크 효과 
+    }
+</script>
+<style type="text/css">
+.button_style {
+	opacity: 5;
+	display: none;
+	position: relative;
+	padding: 30px;
+	background-color: #fff;
+}
+
+.layer_close {
+	position: absolute;
+	right: 3px;
+	top: 1px;
+	padding: 10px;
+	cursor: pointer;
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>로그인</title>
+</head>
+<body>
+	<h1>[로그인]</h1>
+	<form name="frm" action="login" method="post">
+		<table border=1>
+			<tr>
+				<td width=100>아이디</td>
+				<td width=300><input type="text" name="uid"></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="upw"></td>
+			</tr>
+			<tr>
+				<td colspan=2><input type="submit" value="로그인">
+					<button onClick="javascript:goDetail('테스트');">팝업</button>
+					<div style="height: 1000px;"></div>
+					<div id="mask"></div>
+					<div id="layerbox" class="layerpop"
+						style="width: 700px; height: 350px;">
+						<article class="layerpop_area">
+						<div class="title">레이어팝업 타이틀</div>
+						<a href="javascript:popupClose();" class="layerpop_close"
+							id="layerbox_close"></a> <br>
+						<div class="content">
+							레이어 팝업 내용<br /> 레이어 팝업 내용<br /> 레이어 팝업 내용<br /> 레이어 팝업 내용<br />
+							레이어 팝업 내용<br /> 레이어 팝업 내용<br /> 레이어 팝업 내용<br /> 레이어 팝업 내용<br />
+
+						</div>
+						</article>
+					</div></td>
+			</tr>
+		</table>
+	</form>
+</body>
+<script>
+$(frm).submit(function(e){
+	e.preventDefault();
+	var upw=$(frm.upw).val();
+	var uid=$(frm.uid).val();
+	var chkLogin=$(frm.chkLogin).is(":checked")? true:false;
+	$.ajax({
+		type:"post",
+		url:"login",
+		data:{"uid":uid , "upw":upw , "chkLogin" :chkLogin},
+		success:function(data){
+				if(data==0){
+					alert("꺼져라 이방인")
+				}
+				else if(data==2){
+					alert("암호가 틀리다 형제여");
+				}else{
+					alert("환영한다 형제여");
+					location.href="list";
+				}
+		}
+	});
+});
+</script>
+</html>

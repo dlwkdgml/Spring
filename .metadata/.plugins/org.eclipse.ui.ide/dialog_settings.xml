@@ -145,6 +145,7 @@
 		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\띵\Desktop"/>
 			<item value="D:\Spring\setup"/>
 			<item value="D:\Spring\ex02"/>
 		</list>

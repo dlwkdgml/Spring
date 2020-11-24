@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=KakaoAK 4c9947b8b0448265ca15036c39a7fa4e"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>지역검색</title>
+</head>
+<body>
+	<h1>[지역검색]</h1>
+	<table id = "tbl"></table>
+	<script id="temp" type="text/x-handlebars-template">
+   		{{#each documents}}
+		<tr>
+			<td>{{place_name}}</td>
+			<td>{{address_name}}</td>
+			<td>{{phone}}</td>
+			<td><button>지도출력</button></td>
+		</tr>
+		{{/each}}
+	</script>
+</body>
+<script>
+
+	getList();
+	$("#tbl").on("click", ".row button" , function(){
+		var x=$(this).attr("x");
+		var y=$(this).attr("y");
+		alert(x+ "\n"+ y);
+		
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(y ,x),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+		
+	});
+	function getList(){
+		var query = "버거킹";
+		$.ajax({
+			type:"get",
+			url:"local.json",
+			data:{"query":query},
+			dataType:"json",
+			success:function(data){
+				var temp = Handlebars.compile($("#temp").html());
+	             $("#tbl").html(temp(data));
+			}
+		});
+	}
+</script>
+</html>

@@ -1,0 +1,52 @@
+
+﻿﻿﻿﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+ pageEncoding="UTF-8"%>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+ function setCookie(name, value, expiredays) {
+  var todayDate = new Date();
+  todayDate.setMinutes(todayDate.getMinutes() + expiredays);
+  document.cookie = name + "=" + escape(value) + "; path=/; expires="
+    + todayDate.toGMTString() + ";"
+ }
+
+ function closeWin() {
+   if ( document.notice_form.chkbox.checked ){
+    setCookie( "maindiv", "done" , 1 );
+   }
+   document.all['divpop'].style.visibility = "hidden";
+  }
+</script>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+ <!-- POPUP -->
+ <div id="divpop"
+  style="position: absolute; left: 395px; top: 190; z-index: 200; visibility: hidden;">
+  <table width=300 height=400 cellpadding=2 cellspacing=0>
+   <tr>
+    <td> <!-- style="border: 1px #666666 solid" height=360 align=center bgcolor=white>여기에 내용 삽입 -->
+     <img alt="" src="../images/hotel_img1.png">
+    </td>
+   </tr>
+   <tr>
+    <form name="notice_form">
+     <td align=right bgcolor=black><input type="checkbox"
+      name="chkbox" value="checkbox"><font color="white">오늘 하루 이 창을 열지 않음 <a
+      href="javascript:closeWin();"><B>[닫기]</B></a></font></td>
+   </tr>
+   </form>
+  </table>
+ </div>
+ 
+ <script type="text/javascript">
+  cookiedata = document.cookie;
+  if(cookiedata.indexOf("maindiv=done") < 0){
+   document.all['divpop'].style.visibility = "visible" ;
+  }else{
+   document.all['divpop'].style.visibility="hidden";
+  }  
+ </script>
+</body>
+</html>
