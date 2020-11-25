@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
 <style>
@@ -11,6 +12,7 @@
 </head>
 <body>
    <h1>[회원가입]</h1>
+   <form name ="frm" action="insert" method="post" enctype="multipart/form-data">
    <table border=1 >
          <tr>
             <td>사진</td>
@@ -41,19 +43,19 @@
          <tr>
             <td>관심 키워드</td>
             <td>
-               <select name="keyword">
+               <select name="keyword1">
                   <option value="게임">게임</option>
                   <option value="운동">운동</option>
                   <option value="낚시">낚시</option>
                   <option value="자동차">자동차</option>
                </select>
-               <select name="keyword">
+               <select name="keyword2">
                   <option value="게임">게임</option>
                   <option value="운동">운동</option>
                   <option value="낚시">낚시</option>
                   <option value="자동차">자동차</option>
                </select>
-               <select name="keyword">
+               <select name="keyword3">
                   <option value="게임">게임</option>
                   <option value="운동">운동</option>
                   <option value="낚시">낚시</option>
@@ -68,9 +70,7 @@
          <tr>
             <td>생년월일</td>
             <td>
-               <input type="text" name="birthday">:년
-               <input type="text" name="birthday">:월
-               <input type="text" name="birthday">:일
+               <input type="text" name="birthday" maxlength="6">:주민번호 앞자리       
             </td>
          </tr>
          <tr>
@@ -92,5 +92,18 @@
             </td>
          </tr>
       </table>
+     </form> 
 </body>
+<script>
+	$(frm.file).hide();
+	
+	$("#image").on("click",function(){
+		$(frm.file).click();
+	});
+
+	$(frm.file).on("change",function(){
+		var file=$(frm.file)[0].files[0];
+		$("#image").attr("src",URL.createObjectURL(file));
+	});
+</script>
 </html>
