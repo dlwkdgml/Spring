@@ -6,17 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.example.mapper_oracle.OracleMapper;
+import com.example.domain.UserVO;
+import com.example.mapper_oracle.UserMapper;
 
-@RunWith(SpringJUnit4ClassRunner.class) //¸ÕÀú SpringJUnit4ClassRunner.class importÇÑ´Ù.
+@RunWith(SpringJUnit4ClassRunner.class) //ï¿½ï¿½ï¿½ï¿½ SpringJUnit4ClassRunner.class importï¿½Ñ´ï¿½.
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
 
 public class OracleTest {
 	@Autowired
-	private OracleMapper mapper;
+	private UserMapper mapper;
 	
 	@Test
-	public void getTime() { 
-		mapper.getTime(); 
+	public void getTime() { mapper.getTime(); }
+	
+	@Test
+	public void read(){
+		mapper.read("cds301");
 	}
+	
+	
 }

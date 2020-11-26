@@ -24,6 +24,6 @@
 			<td width=200><input type="text" name="upw" value="${vo.upw}"></td>
 		</tr>
 	</table>
-	<input type="button" value="목록" onClick="location.href='list'"> 
+	<input type="button" value="목록" onClick="location.href='/list'"> 
 </body>
 </html>

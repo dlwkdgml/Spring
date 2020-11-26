@@ -1,30 +1,18 @@
 package com.example.domain;
 
-import java.sql.Date;
-
 public class UserVO {
 	private String id;
 	private String pw;
 	private String name;
-	private Date birthday;
+	private String birthday;
 	private String phone;
 	private String addr;
-	private String addrdetail;
+	private String addrDetail;
 	private String email;
 	private String gender;
 	private String keyword;
 	private String pic;
 	private int uno;
-	
-	
-	
-	@Override
-	public String toString() {
-		return "UserVO [id=" + id + ", pw=" + pw + ", name=" + name + ", birthday=" + birthday + ", phone=" + phone
-				+ ", addr=" + addr + ", addrdetail=" + addrdetail + ", email=" + email + ", gender=" + gender
-				+ ", keyword=" + keyword + ", pic=" + pic + ", uno=" + uno + "]";
-	}
-	
 	public String getId() {
 		return id;
 	}
@@ -43,10 +31,10 @@ public class UserVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getPhone() {
@@ -61,11 +49,11 @@ public class UserVO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public String getAddrdetail() {
-		return addrdetail;
+	public String getAddrDetail() {
+		return addrDetail;
 	}
-	public void setAddrdetail(String addrdetail) {
-		this.addrdetail = addrdetail;
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
 	}
 	public String getEmail() {
 		return email;
@@ -97,6 +85,13 @@ public class UserVO {
 	public void setUno(int uno) {
 		this.uno = uno;
 	}
+	@Override
+	public String toString() {
+		return "UserVO [id=" + id + ", pw=" + pw + ", name=" + name + ", birthday=" + birthday + ", phone=" + phone
+				+ ", addr=" + addr + ", addrDetail=" + addrDetail + ", email=" + email + ", gender=" + gender
+				+ ", keyword=" + keyword + ", pic=" + pic + ", uno=" + uno + "]";
+	}
+
 	
 	
 }

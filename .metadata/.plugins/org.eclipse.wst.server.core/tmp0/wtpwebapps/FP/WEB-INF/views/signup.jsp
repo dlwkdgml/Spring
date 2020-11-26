@@ -7,18 +7,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
 <style>
-#birthday{width:60px;}
 </style>
 </head>
 <body>
    <h1>[회원가입]</h1>
-   <form name ="frm" action="insert" method="post" enctype="multipart/form-data">
+   <form name ="frm" action="signup" method="post" enctype="multipart/form-data">
    <table border=1 >
          <tr>
             <td>사진</td>
             <td>
-               <img src="http://placehold.it/150x120" id="image" width=150>
-               <input type="file" name="file">
+               <img src="http://placehold.it/150x120" id="image" name="image" width=150>
+               <input type="file" name="pic" >
             </td>
          </tr>
          <tr>
@@ -42,26 +41,7 @@
          </tr>
          <tr>
             <td>관심 키워드</td>
-            <td>
-               <select name="keyword1">
-                  <option value="게임">게임</option>
-                  <option value="운동">운동</option>
-                  <option value="낚시">낚시</option>
-                  <option value="자동차">자동차</option>
-               </select>
-               <select name="keyword2">
-                  <option value="게임">게임</option>
-                  <option value="운동">운동</option>
-                  <option value="낚시">낚시</option>
-                  <option value="자동차">자동차</option>
-               </select>
-               <select name="keyword3">
-                  <option value="게임">게임</option>
-                  <option value="운동">운동</option>
-                  <option value="낚시">낚시</option>
-                  <option value="자동차">자동차</option>
-               </select>
-            </td>
+            <td><input type="text" name="keyword"></td>
          </tr>
          <tr>
             <td>이름</td>
@@ -70,7 +50,7 @@
          <tr>
             <td>생년월일</td>
             <td>
-               <input type="text" name="birthday" maxlength="6">:주민번호 앞자리       
+            	<input type='date' name='birthday'/>      
             </td>
          </tr>
          <tr>
@@ -83,7 +63,7 @@
          </tr>
          <tr>
             <td>상세주소</td>
-            <td><input type="text" name="addrditail"></td>
+            <td><input type="text" name="addrDetail"></td>
          </tr>
          <tr>
             <td colspan=2>
@@ -95,15 +75,52 @@
      </form> 
 </body>
 <script>
-	$(frm.file).hide();
+	
 	
 	$("#image").on("click",function(){
-		$(frm.file).click();
+	   $(frm.pic).click();
+	});
+	
+	$(frm.pic).on("change",function(){
+	   var file=$(frm.pic)[0].files[0];
+	   $("#image").attr("src",URL.createObjectURL(file));
 	});
 
-	$(frm.file).on("change",function(){
-		var file=$(frm.file)[0].files[0];
-		$("#image").attr("src",URL.createObjectURL(file));
+  
+   
+	$(frm).submit(function(){
+		alert("버튼");
 	});
+   
+ 
+   
+   $(frm).submit(function(e){
+         e.preventDefault();
+         var pic=$(frm.pic).val();
+         var id=$(frm.id).val();
+         var pw=$(frm.pw).val();
+         var email=$(frm.email).val();
+         var gender=$(frm.gender).val();
+         var keyword=$(frm.keyword).val();
+         var name=$(frm.name).val();
+         var birthday=$(frm.birthday).val();
+         var phone=$(frm.phone).val();
+         var addr=$(frm.addr).val();
+         var addrDetail=$(frm.addrDetail).val();
+         alert(pic);
+         $.ajax({
+            type:"post",
+            enctype: 'multipart/formdata',
+            url:"/signup",
+            data:{"pic":pic ,"id":id , "pw":pw,
+               "email":email,"gender":gender,"keyword":keyword,
+               "name":name,"birthday":birthday,"phone":phone,
+               "addr":addr,"addrDetail":addrDetail},
+            success:function(data){
+                  alert("회원가입 성공");
+            }
+         });
+      });
+   
 </script>
 </html>

@@ -22,6 +22,7 @@
          <tr>
             <td>
                <input type="submit" value="로그인">
+               <input type="checkbox" name="chkLogin">로그인 상태유지
             </td>
             <td>
                <a href="/signup"><input type="button" value="회원가입"></a>
@@ -35,11 +36,11 @@ $(frm).submit(function(e){
    e.preventDefault();
    var pw=$(frm.pw).val();
    var id=$(frm.id).val();
-//   var chkLogin=$(frm.chkLogin).is(":checked")? true:false;
+   var chkLogin=$(frm.chkLogin).is(":checked")? true:false;
    $.ajax({
       type:"post",
       url:"login",
-      data:{"id":id , "pw":pw},
+      data:{"id":id , "pw":pw, "chkLogin" :chkLogin},
       success:function(data){
             if(data==0){
                alert("아이디가 없습니다.")

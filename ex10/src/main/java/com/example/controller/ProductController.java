@@ -58,7 +58,7 @@ public class ProductController {
 		model.addAttribute("images", mapper.getImage(pcode));
 	}
 	
-	@RequestMapping("list")
+	@RequestMapping("/list")
 	public void list(Criteria cri , Model model){
 		if(cri.getPerPageNum()==10){
 			cri.setPerPageNum(4);
@@ -89,9 +89,7 @@ public class ProductController {
 			File target = new File(path,savedName);
 			FileCopyUtils.copy(file.getBytes(),target);
 			
-			vo.setImage(savedName);
-			
-			
+			vo.setImage(savedName);	
 		}
 		//첨부이미지들 수정
 		List<MultipartFile> files=multi.getFiles("files");

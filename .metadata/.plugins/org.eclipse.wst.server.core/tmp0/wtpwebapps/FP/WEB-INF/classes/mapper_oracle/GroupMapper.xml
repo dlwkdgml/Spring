@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper_oracle.GroupMapper">
+	<select id="list" resultType="com.example.domain.GroupVO">
+		select * from tbl_group where g_code='1'
+	</select>
+	
+	<insert id="insert">
+		insert into tbl_group(g_code, g_name,g_pass,g_pic) values(seq_group.nextval, #{g_name},#{g_pass},#{g_pic})
+	</insert>
+</mapper>
