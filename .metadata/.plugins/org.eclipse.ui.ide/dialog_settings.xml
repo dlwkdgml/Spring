@@ -145,6 +145,11 @@
 		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\FP"/>
+			<item value="D:\finalProject"/>
+			<item value="D:\setup"/>
+			<item value="D:\ex14"/>
+			<item value="D:\ex13"/>
 			<item value="C:\Users\띵\Desktop"/>
 			<item value="D:\Spring\setup"/>
 			<item value="D:\Spring\ex02"/>

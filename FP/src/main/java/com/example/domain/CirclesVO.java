@@ -5,7 +5,7 @@ import java.sql.Date;
 public class CirclesVO {
 	private String c_code;
 	private String c_pid;
-	private String welcome;
+	private String c_welcome;
 	private String c_condition;
 	private String c_name;
 	private String c_category;
@@ -16,12 +16,6 @@ public class CirclesVO {
 	private Date c_regDate;
 	
 	
-	@Override
-	public String toString() {
-		return "CirclesVO [c_code=" + c_code + ", c_pid=" + c_pid + ", welcome=" + welcome + ", c_condition="
-				+ c_condition + ", c_name=" + c_name + ", c_category=" + c_category + ", c_tag=" + c_tag + ", c_pic="
-				+ c_pic + ", c_spot=" + c_spot + ", c_pchk=" + c_pchk + ", c_regDate=" + c_regDate + "]";
-	}
 	public String getC_code() {
 		return c_code;
 	}
@@ -34,11 +28,11 @@ public class CirclesVO {
 	public void setC_pid(String c_pid) {
 		this.c_pid = c_pid;
 	}
-	public String getWelcome() {
-		return welcome;
+	public String getC_welcome() {
+		return c_welcome;
 	}
-	public void setWelcome(String welcome) {
-		this.welcome = welcome;
+	public void setC_welcome(String c_welcome) {
+		this.c_welcome = c_welcome;
 	}
 	public String getC_condition() {
 		return c_condition;
@@ -88,6 +82,13 @@ public class CirclesVO {
 	public void setC_regDate(Date c_regDate) {
 		this.c_regDate = c_regDate;
 	}
+	@Override
+	public String toString() {
+		return "CirclesVO [c_code=" + c_code + ", c_pid=" + c_pid + ", c_welcome=" + c_welcome + ", c_condition="
+				+ c_condition + ", c_name=" + c_name + ", c_category=" + c_category + ", c_tag=" + c_tag + ", c_pic="
+				+ c_pic + ", c_spot=" + c_spot + ", c_pchk=" + c_pchk + ", c_regDate=" + c_regDate + "]";
+	}
+	
 	
 	
 }

@@ -9,8 +9,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>동아리등록</title>
 <style>
-span.hashtag {
-   color: blue;
+ul li.tag-item {
+   padding: 4px 8px;
+   background-color: #777;
+   color: #000;
+}
+
+.tag-item:hover {
+   background-color: #262626;
+   color: #fff;
 }
 </style>
 </head>
@@ -37,10 +44,22 @@ span.hashtag {
                   <option value="자동차">자동차</option>
             </select></td>
          </tr>
+
          <tr>
             <td width=150>태그</td>
-            <td width=500><input type="text" name="C_TAG"
-               placeholder="#해쉬 #태그"></td>
+            <td>
+               <div class="content">
+                  <form action="insert" method="POST" id="tag-form">
+                     <input type="hidden" value="" name="tag" id="rdTag" />
+                     <button onclick="btnHash">태그등록</button>
+                  </form>
+                  <div>
+                     <input type="text" id="C_TAG" size="7" placeholder="태크엔터!" />
+                  </div>
+                  <ul id="tag-list">
+                  </ul>
+               </div>
+            </td>
          </tr>
          <tr>
             <td width=150>인삿말</td>
@@ -62,32 +81,86 @@ span.hashtag {
             <td width=500><input type="text" name="C_SPOT"
                placeholder="어디서활동하세요?"></td>
          </tr>
-
-
       </table>
-      <input type="submit" value="저장"> <input type="reset"
-         value="취소">
-      <!-- 
-<script type="text/javascript">
-         var content = document.getElementById('C_TAG').innerHTML;
-         var splitedArray = content.split(' ');
-         var linkedContent = '';
-         for ( var word in splitedArray) {
-            word = splitedArray[word];
-            if (word.indexOf('#') == 0) {
-
-               word = '<a href=\'링크\'>' + word + '</a>';
-            }
-            linkedContent += word + ' ';
-         }
-         document.getElementById('C_TAG').innerHTML = linkedContent;
-      </script>
- -->
-
+      <input type="submit" value="저장"> <input type="reset" value="취소">
    </form>
 </body>
 
 <script>
+   //해쉬태그작동, 서버에 옮기기
+   $(document)
+         .ready(
+               function() {
+                  var C_TAG = {};
+                  var counter = 0;
+                  // 태그를 추가한다.
+                  function addTag(value) {
+                     C_TAG[counter] = value; // 태그를 Object 안에 추가
+                     counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
+                  }
+                  // 최종적으로 서버에 넘길때 tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+                  function marginTag() {
+                     return Object.values(C_TAG).filter(function(word) {
+                        return word !== "";
+                     });
+                  }
+                  // 서버에 넘기기
+                  function btnHash() {
+                     var value = marginTag(); // return array
+                     $("#rdTag").val(value);
+
+                     $(this).submit();
+                  }
+
+                  $("#C_TAG")
+                        .on( "keypress",
+                              function(e) {
+                                 var self = $(this);
+                                 // input 에 focus 되있을 때 엔터 및 스페이스바 입력시 구동
+                                 if (e.key === "Enter"
+                                       || e.keyCode == 32) {
+                                    var tagValue = self.val(); // 값 가져오기
+                                    
+                                    // 값이 없으면 동작 ㄴㄴ
+                                    if (tagValue !== "") {
+
+                                       // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+                                       var result = Object
+                                             .values(C_TAG)
+                                             .filter(
+                                                   function(
+                                                         word) {
+                                                      return word === tagValue;
+                                                   })
+
+                                       // 태그 중복 검사
+                                       if (result.length == 0) {
+                                          $("#tag-list")
+                                                .append(
+                                                      "<li class='tag-item'>"
+                                                            + tagValue
+                                                            + "<span class='del-btn' idx='"+counter+"'>x</span></li>");
+                                          addTag(tagValue);
+                                          self.val("");
+                                       } else {
+                                          alert("태그값이 중복됩니다.");
+                                       }
+                                    }
+                                    e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+                                 }
+                              });
+
+                  // 삭제 버튼은 비동기적 생성이므로 document 최초 생성시가 아닌 검색을 통해 이벤트를 구현시킨다.
+                  $(document).on("click", ".del-btn", function(e) {
+                     var index = $(this).attr("idx");
+                     C_TAG[index] = "";
+                     $(this).parent().remove();
+                  });
+               });
+
+   
+   
+   //서밋했을때
    $(frm).submit(function(e) {
       e.preventDefault();
       var C_NAME = $(frm.C_NAME).val();
@@ -99,21 +172,20 @@ span.hashtag {
       var C_PIC = $(frm.C_PIC).val();
       var C_SPOT = $(frm.C_SPOT).val();
 
-      alert(C_NAME);
+      alert(C_NAME + "\n" + C_TAG + "\n" + C_CONDITION + "\n" + C_CATEGORY + "\n" + C_PCHK + "\n" + C_WELCOME + "\n" + C_PIC + "\n" + C_SPOT);
       $.ajax({
-         type : 'post',
-         url : 'insert',
+         type : "post",
+         url : "insert",
          data : {
-            "C_NAME" : C_NAME,
-            "C_PCHK":C_PCHK,
-            "C_WELCOME":C_WELCOME,
-            "C_CONDITION":C_CONDITION,
-            "C_CATEGORY":C_CATEGORY,
-            "C_TAG":C_TAG,
-            "C_PIC":C_PIC,
-            "C_SPOT":C_SPOT
+            "c_name" : C_NAME,
+            "c_pchk" : C_PCHK,
+            "c_welcome" : C_WELCOME,
+            "c_condition" : C_CONDITION,
+            "c_category" : C_CATEGORY,
+            "c_tag" : C_TAG,
+            "c_pic" : C_PIC,
+            "c_spot" : C_SPOT
          },
-         dataType : 'json',
          success : function(data) {
             if ($(frm.C_NAME).val() == "") {
                alert("동아리이름");
@@ -130,11 +202,11 @@ span.hashtag {
          }
       });
    });
-   
-   $(frm.C_PIC).on("change",function(){
-       var file=$(frm.C_PIC)[0].files[0];
-       $("#image").attr("src",URL.createObjectURL(file));
-    });
+
+   $(frm.C_PIC).on("change", function() {
+      var file = $(frm.C_PIC)[0].files[0];
+      $("#image").attr("src", URL.createObjectURL(file));
+   });
 </script>
 
 </html>

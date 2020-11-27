@@ -76,6 +76,7 @@
 </body>
 <script>
 	
+	$(frm.pic).hide();
 	
 	$("#image").on("click",function(){
 	   $(frm.pic).click();
@@ -83,6 +84,7 @@
 	
 	$(frm.pic).on("change",function(){
 	   var file=$(frm.pic)[0].files[0];
+
 	   $("#image").attr("src",URL.createObjectURL(file));
 	});
 
@@ -111,7 +113,7 @@
          $.ajax({
             type:"post",
             enctype: 'multipart/formdata',
-            url:"/signup",
+            url:"signup",
             data:{"pic":pic ,"id":id , "pw":pw,
                "email":email,"gender":gender,"keyword":keyword,
                "name":name,"birthday":birthday,"phone":phone,

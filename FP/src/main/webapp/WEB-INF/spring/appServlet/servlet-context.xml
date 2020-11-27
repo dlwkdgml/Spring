@@ -36,7 +36,10 @@
 	</beans:bean>
 	<interceptors>
 		<interceptor>
-			<mapping path="/read"/>
+			<mapping path="/addMember"/>
+			<mapping path="/createClub"/>
+			<mapping path="/makeGroup"/>
+			<mapping path="/gu"/>
 			<beans:bean id="AuthInterceptor" class="com.example.interceptor.AuthInterceptor"/>
 		</interceptor>
 	</interceptors>

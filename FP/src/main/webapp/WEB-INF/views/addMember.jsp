@@ -18,7 +18,7 @@
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each .}}
 		<div>
-			<input type="checkbox" value="{{uno}}" name="selectedMember">			
+			<input type="checkbox" value="{{id}}" name="selectedMember">			
 			이름 : {{name}} 
 			아이디 : {{id}} 
       	</div>	
@@ -43,13 +43,29 @@
 	})
 	
 	$("#complete").on("click",function(){
-		var check_count = document.getElementsByName("selectedMember").length;
-		for(var i=0; i<check_count; i++){
-			if (document.getElementsByName("selectedMember")[i].checked == true) {
-				alert(document.getElementsByName("selectedMember")[i].value);
-				// 친구 초대하는 ajax 실행하면 됨
-			}
-		}
-	})
+      
+      var g_code = 21; // session에서 g_code를 가져온다.
+      var gu_pwchk= "N";
+      var check_count = document.getElementsByName("selectedMember").length;
+      for(var i=0; i<check_count; i++){
+         if (document.getElementsByName("selectedMember")[i].checked == true) {
+            //alert(document.getElementsByName("selectedMember")[i].value);
+            // 친구 초대하는 ajax 실행하면 됨
+            
+            var id=document.getElementsByName("selectedMember")[i].value;
+            alert(id);
+            
+            $.ajax({
+               type :"get",
+                url : "addMembers",
+                data : {"g_code" : g_code, "gu_pwchk" :gu_pwchk,"id":id},
+                success : function(){
+                }
+            });
+         }
+      }
+	});
+	
+	
 </script>
 </html>

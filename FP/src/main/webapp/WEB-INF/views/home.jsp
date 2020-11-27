@@ -10,7 +10,7 @@
 <body>
 	<h1>[유저목록]</h1>
 	
-	<img src="display?fileName=${pic}" width=150>
+<%-- 	<img src="display?fileName=${pic}" width=150> --%>
 	
 	<c:if test="${id == null}">
 	<button onClick="location.href='login'">로그인</button>
@@ -21,17 +21,5 @@
 	<span>${id}님 입장</span>
 	</c:if>
 	
-<!-- 	<table border=1> -->
-<!-- 		<tr> -->
-<!-- 			<td width=100>아이디</td> -->
-<!-- 			<td width=100>이름</td> -->
-<!-- 		</tr> -->
-<%-- 		<c:forEach items="${list}" var="vo"> --%>
-<!-- 			<tr> -->
-<%-- 				<td width=100><a href="read?id=${vo.id}">${vo.id}</a></td> --%>
-<%-- 				<td width=100>${vo.name}</td> --%>
-<!-- 			</tr> -->
-<%-- 		</c:forEach> --%>
-<!-- 	</table> -->
 </body>
 </html>

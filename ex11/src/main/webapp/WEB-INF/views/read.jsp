@@ -13,6 +13,10 @@
 	<table border=1>
 		<tr>
 			<td width=100>아이디</td>
+			<td width=200><input type="hidden" name="id" value="${vo.id}"></td>
+		</tr>
+		<tr>
+			<td width=100>아이디</td>
 			<td width=200><input type="text" name="uid" value="${vo.uid}"></td>
 		</tr>
 		<tr>

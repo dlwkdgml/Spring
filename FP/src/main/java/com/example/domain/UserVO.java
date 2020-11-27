@@ -1,6 +1,6 @@
 package com.example.domain;
 
-public class UserVO {
+public class UserVO extends GuVO{
 	private String id;
 	private String pw;
 	private String name;
